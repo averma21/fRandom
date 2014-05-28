@@ -1,20 +1,2 @@
 <web-app>
-    <servlet>
-        <servlet-name>Root resource classes registry</servlet-name>
-        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet>
-        <servlet-name>Chat initiator</servlet-name>
-        <servlet-class>com.frandom.ChatInitiatorServlet</servlet-class>
-        <load-on-startup>2</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Root resource classes registry</servlet-name>
-        <url-pattern>/hello/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Chat initiator</servlet-name>
-        <url-pattern>/chat/*</url-pattern>
-    </servlet-mapping>
 </web-app>

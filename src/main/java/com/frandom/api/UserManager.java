@@ -28,7 +28,7 @@ public interface UserManager {
     /**
      * @return online users.
      */
-    Set<User> getOnlineUsers();
+    Set<OnlineUser> getOnlineUsers();
 
     /**
      * @param id user id
@@ -45,13 +45,13 @@ public interface UserManager {
     /**
      * @param user new online user to be added.
      */
-    void addOnlineUser(User user);
+    void addOnlineUser(OnlineUser user);
 
     /**
      * Get online friends of passed user.
      * @param user user
      * @return online friends ({@link User}s)
      */
-    Set<User> getOnlineFriendsOf(User user);
+    Set<OnlineUser> getOnlineFriendsOf(User user);
 
 }

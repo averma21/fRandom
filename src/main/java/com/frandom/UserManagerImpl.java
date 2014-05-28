@@ -1,8 +1,11 @@
 package com.frandom;
 
+import com.frandom.api.OnlineUser;
 import com.frandom.api.User;
 import com.frandom.api.UserManager;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -15,15 +18,16 @@ import java.util.Set;
  * Time: 12:56 AM
  * To change this template use File | Settings | File Templates.
  */
+@Named
 public class UserManagerImpl implements UserManager {
 
-    private final Map<String, User> userIDtoUserMap;
-    private final Map<String, User> fbUserIDtoUserMap;
+    private final Map<String, OnlineUser> userIDtoUserMap;
+    private final Map<String, OnlineUser> fbUserIDtoUserMap;
 
 
     public UserManagerImpl() {
-        userIDtoUserMap = new HashMap<String, User>();
-        fbUserIDtoUserMap = new HashMap<String, User>();
+        userIDtoUserMap = new HashMap<String, OnlineUser>();
+        fbUserIDtoUserMap = new HashMap<String, OnlineUser>();
     }
 
     @Override
@@ -43,19 +47,19 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public Set<User> getOnlineUsers() {
-        return new HashSet<User>(userIDtoUserMap.values());
+    public Set<OnlineUser> getOnlineUsers() {
+        return new HashSet<OnlineUser>(userIDtoUserMap.values());
     }
 
     @Override
-    public void addOnlineUser(User user) {
+    public void addOnlineUser(OnlineUser user) {
         userIDtoUserMap.put(user.getID(), user);
         fbUserIDtoUserMap.put(user.getFbID(), user);
     }
 
     @Override
-    public Set<User> getOnlineFriendsOf(User user) {
-        Set<User> friends = new HashSet<User>();
+    public Set<OnlineUser> getOnlineFriendsOf(User user) {
+        Set<OnlineUser> friends = new HashSet<OnlineUser>();
         for (String id : user.getFriendsIDs()) {
             if (userIDtoUserMap.containsKey(id)) {
                 friends.add(userIDtoUserMap.get(id));

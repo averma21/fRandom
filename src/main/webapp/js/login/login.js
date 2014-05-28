@@ -1,6 +1,6 @@
 window.fbAsyncInit = function() {
     FB.init({
-        appId      : '',
+        appId      : '282861061882459',
         cookie     : true,  // enable cookies to allow the server to access the session
         xfbml      : true,  // parse social plugins on this page
         version    : 'v2.0' // use version 2.0
@@ -90,14 +90,23 @@ frandom.login = {
                     data["fbFriends"].push(response.data[i].id);
                 }
                 console.log(data);
-                $.ajax({
+                var socket = new WebSocket("ws://localhost:8080/frandom-1.0.0-SNAPSHOT/chat");
+                socket.onopen = function(event) {
+                    console.log("opened");
+                    socket.send(JSON.stringify(data));
+                }
+                socket.onmessage = function(event) {
+                    console.log("message:" + event.data);
+                }
+
+                /*$.ajax({
                     type: "POST",
                     data: data,
                     url: "chat",
                     success: function(res) {
                         alert(res);
                     }
-                });
+                });*/
             });
         });
     }        
